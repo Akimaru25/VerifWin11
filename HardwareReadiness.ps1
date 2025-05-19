@@ -22,6 +22,8 @@
 
 #=============================================================================================================================
 
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process -FilePath "powershell" -ArgumentList "-ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
+
 $exitCode = 0
 
 [int]$MinOSDiskSizeGB = 64
@@ -492,16 +494,16 @@ Add-Type -AssemblyName System.Windows.Forms
 
 switch ($outObject.returnCode) {
     0 {
-        [System.Windows.Forms.MessageBox]::Show("La machine est compatible.", "Résultat", "OK", "Information")
+        [System.Windows.Forms.MessageBox]::Show("La machine est compatible.", "RÃ©sultat", "OK", "Information")
     }
     1 {
-        [System.Windows.Forms.MessageBox]::Show("La machine n'est pas compatible.", "Résultat", "OK", "Error")
+        [System.Windows.Forms.MessageBox]::Show("La machine n'est pas compatible.", "RÃ©sultat", "OK", "Error")
     }
     -1 {
-        [System.Windows.Forms.MessageBox]::Show("Une erreur est survenue lors de la vérification.", "Erreur", "OK", "Warning")
+        [System.Windows.Forms.MessageBox]::Show("Une erreur est survenue lors de la vÃ©rification.", "Erreur", "OK", "Warning")
     }
     -2 {
-        [System.Windows.Forms.MessageBox]::Show("Le script ne s'est pas exécuté correctement.", "Erreur", "OK", "Warning")
+        [System.Windows.Forms.MessageBox]::Show("Le script ne s'est pas exÃ©cutÃ© correctement.", "Erreur", "OK", "Warning")
     }
 }
 
